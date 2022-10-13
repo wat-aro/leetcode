@@ -18,20 +18,15 @@ impl ListNode {
 }
 
 pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
-    if let Some(head) = head {
-        let mut head = head;
-        let mut prev = None;
-        while let Some(next) = (*head).next {
-            (*head).next = prev;
-            prev = Some(head);
-            head = next;
-        }
-        (*head).next = prev;
-
-        Some(head)
-    } else {
-        None
+    let mut prev = None;
+    let mut head = head;
+    while let Some(mut value) = head {
+        let next = (*value).next;
+        (*value).next = prev;
+        prev = Some(value);
+        head = next;
     }
+    prev
 }
 
 #[cfg(test)]
